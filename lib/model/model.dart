@@ -1,20 +1,20 @@
 class BookModel {
-  String id;
-  String title;
-  String description;
-  double price;
-  String image;
-  String author;
-  String category;
+  String? id;
+  String? title;
+  String? description;
+  double? price;
+  String? image;
+  String? author;
+  String? category;
 
   BookModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.image,
-    required this.author,
-    required this.category,
+    this.id,
+    this.title,
+    this.description,
+    this.price,
+    this.image,
+    this.author,
+    this.category,
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
