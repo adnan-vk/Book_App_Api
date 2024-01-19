@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project/model/usermodel.dart';
 import 'package:project/service/userservice.dart';
 
-class UserProvider extends ChangeNotifier{
+class UserProvider extends ChangeNotifier {
   TextEditingController usernamcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   UserService userService = UserService();
 
   String? userStatusCode;
@@ -16,7 +17,7 @@ class UserProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  userLogin(UserModel userInfo)async{
+  userLogin(UserModel userInfo) async {
     await userService.userLogin(userInfo);
     userStatusCode = userService.userStatusCode;
     notifyListeners();

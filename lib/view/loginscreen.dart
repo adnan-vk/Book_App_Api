@@ -1,13 +1,15 @@
-
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/controller/userprovider.dart';
 import 'package:project/model/usermodel.dart';
 import 'package:project/view/homepage.dart';
 import 'package:project/view/signup.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-String tokenId = '';
+// String tokenId = '';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,94 +19,101 @@ class LoginScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final pro = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        // padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(),
-            Container(
-              padding: const EdgeInsets.only(top: 150, left: 20, right: 20),
-              width: double.infinity,
-              height: size.height * .6,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)),
-                  color: Color.fromARGB(255, 142, 124, 124)),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: pro.usernamcontroller,
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(20)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30)),
-                        labelText: "Enter Your Username",
-                        labelStyle: const TextStyle(color: Colors.white)),
+      body: SingleChildScrollView(
+        
+        child: Container(
+          // alignment: Alignment.center,
+          padding: const EdgeInsets.all(40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: size.height*.2,),
+              Material(
+                elevation: 5,
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(top: 106, left: 20, right: 20),
+                  width: double.infinity,
+                  height: size.height * .6,
+                  child: Column(
+                    children: [
+                      Text("WELCOME BACK"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          )),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        controller: pro.usernamcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          labelText: "Enter Your Username",
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: pro.passwordcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          labelText: "Enter Your Password",
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FloatingActionButton.extended(
+                        label: const Text("LOGIN"),
+                        backgroundColor: Colors.orange,
+                          //  ButtonStyle(
+                          //     backgroundColor: MaterialStatePropertyAll(
+                          //         Colors.orange)),
+                          onPressed: () {
+                            userLogin(context);
+                          },
+                          // child: const Text(
+                          //   "LOGIN",
+                          // )
+                          )
+                          ,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                           const Text("Dont Have an Account ? "),
+                           TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>  SigninScreen(),
+                                ));
+                          },
+                          child: const Text("SIGNUP", style: TextStyle(color: Colors.orange),)
+                          ),
+                        ],
+                      )
+                      
+                    ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: pro.passwordcontroller,
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(20)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30)),
-                        labelText: "Enter Your Password",
-                        labelStyle: const TextStyle(color: Colors.white)),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 63, 69, 40))),
-                      onPressed: () {
-                        userLogin(context);
-                      },
-                      child: const Text("LOGIN",
-                          style: TextStyle(color: Colors.white))),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SigninScreen(),
-                            ));
-                      },
-                      child: const Text(
-                        "Go to SignIn",
-                        style: TextStyle(
-                            color: Color.fromARGB(
-                              255,
-                              8,
-                              7,
-                              60,
-                            ),
-                            fontWeight: FontWeight.w800),
-                      )),
-                ],
-              ),
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -112,23 +121,29 @@ class LoginScreen extends StatelessWidget {
 
   userLogin(context) async {
     final getProvider = Provider.of<UserProvider>(context, listen: false);
+    final getshrd = Provider.of<ShrdProvider>(context, listen: false);
     final userInfo = UserModel(
-      username: getProvider.usernamcontroller.text.toString(),
-      password: getProvider.passwordcontroller.text.toString(),
+      username: getProvider.usernamcontroller.text.toString().trim(),
+      password: getProvider.passwordcontroller.text.toString().trim(),
     );
 
-    // try {
+    try {
       await getProvider.userLogin(userInfo);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
-      // log("Token : $tokenId");
-      // if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
-      //   final sharedPreferences = await SharedPreferences.getInstance();
-      //   await sharedPreferences.setString('token', tokenId);
-      //   Navigator.push(
-      //       context, MaterialPageRoute(builder: (context) => const HomePage()));
-      // } else if (getProvider.userStatusCode == '500') {}
-    // } catch (e) {
-    //   log('Error during user login: $e');
-    // }
+      final tokenId = getshrd.getToken();
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ));
+      log("Token : $tokenId");
+      if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
+        final sharedPreferences = await SharedPreferences.getInstance();
+        await sharedPreferences.setString('Token', tokenId);
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => const HomePage()));
+      } else if (getProvider.userStatusCode == '500') {}
+    } catch (e) {
+      log('Error during user login: $e');
+    }
   }
 }
