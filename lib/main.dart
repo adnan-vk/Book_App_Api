@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (context) => UserProvider(),)
       ],
-      child:  MaterialApp(
+      child:  const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: LoginScreen(),
       ),

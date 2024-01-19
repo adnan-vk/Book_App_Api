@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:project/controller/userprovider.dart';
 import 'package:project/model/usermodel.dart';
@@ -17,27 +19,27 @@ class SigninScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextFormField(
               controller: usernamcontroller,
-              decoration: InputDecoration(labelText: "Enter Your Username"),
+              decoration: const InputDecoration(labelText: "Enter Your Username"),
             ),
             TextFormField(
               controller: passwordcontroller,
-              decoration: InputDecoration(labelText: "Enter Your Password"),
+              decoration: const InputDecoration(labelText: "Enter Your Password"),
             ),
             TextFormField(
               controller: emailController,
-              decoration: InputDecoration(labelText: "Enter Your Email"),
+              decoration: const InputDecoration(labelText: "Enter Your Email"),
             ),
             ElevatedButton(
                 onPressed: () {
                   createUser(context);
                   Navigator.pop(context);
                 },
-                child: Text("SIGNIN"))
+                child: const Text("SIGNIN"))
           ],
         ),
       ),
@@ -46,9 +48,9 @@ class SigninScreen extends StatelessWidget {
 
   createUser(context) async {
   final userInfo = UserModel(
-    usernamcontroller.text.toString(),
-    passwordcontroller.text.toString(),
-    emailController.text.toString(),
+    username:  usernamcontroller.text.toString(),
+    password:  passwordcontroller.text.toString(),
+    email:  emailController.text.toString(),
   );
 
   Provider.of<UserProvider>(context, listen: false).createUser(userInfo);

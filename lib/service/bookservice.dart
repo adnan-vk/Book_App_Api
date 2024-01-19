@@ -20,12 +20,12 @@ class BookService {
             .map((product) => BookModel.fromJson(product))
             .toList();
       } else {
-        print('Failed to load. Status code: ${response.statusCode}');
+        log('Failed to load. Status code: ${response.statusCode}');
         throw Exception('Failed to load');
       }
     } catch (e) {
-      print('Error in ApiService: $e');
-      throw e;
+      log('Error in ApiService: $e');
+      rethrow;
     }
   }
 }

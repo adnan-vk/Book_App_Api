@@ -1,6 +1,13 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:project/controller/userprovider.dart';
+import 'package:project/model/usermodel.dart';
 import 'package:project/view/homepage.dart';
 import 'package:project/view/signup.dart';
+import 'package:provider/provider.dart';
+
+String tokenId = '';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final pro = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,10 +35,11 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50)),
-                  color: Color.fromARGB(255, 7, 37, 62)),
+                  color: Color.fromARGB(255, 142, 124, 124)),
               child: Column(
                 children: [
                   TextFormField(
+                    controller: pro.usernamcontroller,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -47,6 +56,7 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: pro.passwordcontroller,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.white),
@@ -62,17 +72,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                       style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.grey)),
+                          backgroundColor: MaterialStatePropertyAll(
+                              Color.fromARGB(255, 63, 69, 40))),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ));
+                        userLogin(context);
                       },
                       child: const Text("LOGIN",
-                          style: TextStyle(color: Colors.black))),
+                          style: TextStyle(color: Colors.white))),
                   const SizedBox(
                     height: 20,
                   ),
@@ -85,8 +91,15 @@ class LoginScreen extends StatelessWidget {
                             ));
                       },
                       child: const Text(
-                        "Go to SignIN",
-                        style: TextStyle(color: Colors.green),
+                        "Go to SignIn",
+                        style: TextStyle(
+                            color: Color.fromARGB(
+                              255,
+                              8,
+                              7,
+                              60,
+                            ),
+                            fontWeight: FontWeight.w800),
                       )),
                 ],
               ),
@@ -96,5 +109,26 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-  
+
+  userLogin(context) async {
+    final getProvider = Provider.of<UserProvider>(context, listen: false);
+    final userInfo = UserModel(
+      username: getProvider.usernamcontroller.text.toString(),
+      password: getProvider.passwordcontroller.text.toString(),
+    );
+
+    // try {
+      await getProvider.userLogin(userInfo);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+      // log("Token : $tokenId");
+      // if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
+      //   final sharedPreferences = await SharedPreferences.getInstance();
+      //   await sharedPreferences.setString('token', tokenId);
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => const HomePage()));
+      // } else if (getProvider.userStatusCode == '500') {}
+    // } catch (e) {
+    //   log('Error during user login: $e');
+    // }
+  }
 }
