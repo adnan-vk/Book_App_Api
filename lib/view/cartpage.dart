@@ -12,12 +12,10 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        child: const Column(
-          children: [
-            
-          ],
-        ),
+      body: const Column(
+        children: [
+          
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/controller/bookprovider.dart';
 import 'package:project/controller/shrdprfprovider.dart';
+import 'package:project/view/details.dart';
 import 'package:project/view/loginscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -20,16 +21,16 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: TextFormField(
-          decoration: InputDecoration(label: Text("search here")),
-        ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.orange,
         elevation: 0,
         centerTitle: true,
         title: const Text(
           "Books List",
           style: TextStyle(
-              color: Colors.orange, fontWeight: FontWeight.w500, fontSize: 40),
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 40,
+          ),
         ),
         actions: [
           IconButton(
@@ -37,14 +38,15 @@ class _HomePageState extends State<HomePage> {
               prov.clearToken();
               prov.clearUserId();
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginScreen(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.shopping_bag_outlined,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           const SizedBox(
@@ -52,88 +54,121 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        color: Colors.grey,
-        child: Consumer<BookProvider>(
-          builder: (context, value, child) {
-            if (value.booklist.isNotEmpty) {
-              final allBooks = value.booklist;
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .8,
-                  crossAxisSpacing: size.width * .03,
-                  mainAxisSpacing: size.height * .02,
-                ),
-                itemBuilder: (context, index) {
-                  final item = allBooks[index];
-                  return Column(
-                    children: [
-                      Material(
+      body: Consumer<BookProvider>(
+        builder: (context, value, child) {
+          if (value.booklist.isNotEmpty) {
+            final allBooks = value.booklist;
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Search here ...",
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        elevation: 9,
-                        child: Container(
-                          width: size.width * .4,
-                          height: size.width * .5,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage("${item.image}")),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Padding(
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisExtent: size.height * .4,
+                      crossAxisSpacing: size.width * 0.01,
+                      mainAxisSpacing: size.height * 0.01,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = allBooks[index];
+                      return SingleChildScrollView(
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => detailsPage(),
+                              )),
+                          child: Container(
+                            // height: size.height*.6,
                             padding: const EdgeInsets.all(10),
+                            color: Colors.white,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: size.width * .2,
-                                  height: size.height * .2,
-                                  decoration: BoxDecoration(),
+                                Stack(children: [
+                                  Container(
+                                    width: size.width * 0.5,
+                                    height: size.height * 0.3,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage("${item.image}"),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                      left: 180,
+                                      top: 20,
+                                      child: Container(
+                                        color: Colors.black38,
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.shopping_bag_outlined,
+                                              color: Colors.orange,
+                                            )),
+                                      ))
+                                ]),
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                                SizedBox(
-                                  height: size.height * .01,
+                                Text(
+                                  "name : ${item.title}".toUpperCase(),
+                                  style: const TextStyle(
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 15),
+                                ),
+                                Text(
+                                  "author : ${item.author}".toUpperCase(),
+                                  style: const TextStyle(
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 10),
+                                ),
+                                Text(
+                                  "Type :  ${item.category}".toUpperCase(),
+                                  style: const TextStyle(
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 10),
+                                ),
+                                Text(
+                                  "₹ : ${item.price}".toUpperCase(),
+                                  style: const TextStyle(
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 10),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      ),
-                      // SizedBox(height: 10,),
-                      Container(
-                        width: size.width * .25,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          children: [
-                            Text(
-                              "₹ : ${item.price}".toUpperCase(),
-                              style: const TextStyle(
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.w200),
-                            ),
-                            Text(
-                              "Type :  ${item.category}".toUpperCase(),
-                              style: const TextStyle(
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.w200),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  );
-                },
-                itemCount: allBooks.length,
-              );
-            } else {
-              return const Center(child: Text("No data"));
-            }
-          },
-        ),
+                      );
+                    },
+                    itemCount: allBooks.length,
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Center(child: Text("No data"));
+          }
+        },
       ),
-      // bottomNavigationBar: BottomBar(),
     );
   }
 }

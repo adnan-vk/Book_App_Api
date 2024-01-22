@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/controller/userprovider.dart';
 import 'package:project/model/usermodel.dart';
-import 'package:project/view/homepage.dart';
+import 'package:project/view/bottombar.dart';
 import 'package:project/view/signup.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,9 +37,9 @@ class LoginScreen extends StatelessWidget {
                   height: size.height * .6,
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text("WELCOME BACK")),
+                        child: Text("WELCOME BACK")),
                       const SizedBox(
                         height: 10,
                       ),
@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomePage(),
+            builder: (context) => const BottomBar(),
           ));
       log("Token : $tokenId");
       if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
