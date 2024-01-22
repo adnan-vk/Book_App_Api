@@ -4,15 +4,15 @@ import 'package:project/view/homepage.dart';
 import 'package:project/view/loginscreen.dart';
 
 class BottomBar extends StatelessWidget {
-  BottomBar({Key? key}) : super(key: key);
+  const BottomBar({Key? key}) : super(key: key);
 
   // Define your pages or tabs
   List<Widget> _buildScreens() {
     return [
-      HomePage(),
-      LoginScreen(),
-      HomePage(),
-      LoginScreen(),
+      const HomePage(),
+      const LoginScreen(),
+      const HomePage(),
+      const LoginScreen(),
     ];
   }
 
@@ -20,25 +20,25 @@ class BottomBar extends StatelessWidget {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.home),
+        icon: const Icon(Icons.home),
         title: "Home",
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.shopping_bag),
+        icon: const Icon(Icons.shopping_bag),
         title: "Shopping",
         activeColorPrimary: Colors.red,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.favorite),
+        icon: const Icon(Icons.favorite),
         title: "Favorites",
         activeColorPrimary: Colors.green,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.person),
+        icon: const Icon(Icons.person),
         title: "Profile",
         activeColorPrimary: Colors.orange,
         inactiveColorPrimary: Colors.grey,
@@ -65,11 +65,11 @@ class BottomBar extends StatelessWidget {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 200),
         curve: Curves.easeInOut,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
         animateTabTransition: true,
         curve: Curves.easeInOut,
         duration: Duration(milliseconds: 200),

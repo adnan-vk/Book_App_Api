@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class shrdService {
+class ShrdService {
   setToken(tokenId) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('Token', tokenId);

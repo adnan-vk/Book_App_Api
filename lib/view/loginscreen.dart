@@ -37,7 +37,9 @@ class LoginScreen extends StatelessWidget {
                   height: size.height * .6,
                   child: Column(
                     children: [
-                      Text("WELCOME BACK"),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: const Text("WELCOME BACK")),
                       const SizedBox(
                         height: 10,
                       ),
@@ -97,6 +99,7 @@ class LoginScreen extends StatelessWidget {
                            const Text("Dont Have an Account ? "),
                            TextButton(
                           onPressed: () {
+                            userLogin(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -133,7 +136,7 @@ class LoginScreen extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ));
       log("Token : $tokenId");
       if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {

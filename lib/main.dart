@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project/controller/bookprovider.dart';
 import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/controller/userprovider.dart';
+import 'package:project/view/homepage.dart';
+import 'package:project/view/loginscreen.dart';
 import 'package:project/view/welcome.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
           )
         ),
         debugShowCheckedModeBanner: false,
-        home: Welcome(),
+        home: const HomePage(),
       ),
     );
   }

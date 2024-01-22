@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project/service/shrdprf.dart';
 
 class ShrdProvider extends ChangeNotifier {
-  shrdService store = shrdService();
+  ShrdService store = ShrdService();
   setToken(tokenId) async {
     await store.setToken(tokenId);
     notifyListeners();

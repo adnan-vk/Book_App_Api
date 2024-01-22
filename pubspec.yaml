@@ -28,12 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bootstrap_icons: ^1.11.3
   cupertino_icons: ^1.0.2
   dio: ^5.4.0
   flutter:
     sdk: flutter
   google_fonts: ^6.1.0
   http: ^1.1.0
+  icony: ^1.0.5
   lottie: ^2.7.0
   persistent_bottom_nav_bar: ^5.0.2
   provider: ^6.1.1
@@ -43,6 +45,13 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.jpg"
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -55,8 +64,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
-  #   - images/a_dot_ham.jpeg
+    - assets/images/logo.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

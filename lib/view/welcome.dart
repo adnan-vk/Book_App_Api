@@ -8,13 +8,17 @@ class Welcome extends StatelessWidget {
   // @override
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          // color: Colors.red,
-          image: DecorationImage(image: AssetImage('assets/images/book 2.jpg'),)
+         padding: const EdgeInsets.all(15),
+          height: size.height,
+          width: size.width,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  // opacity: .7,
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/weather bg (2).jpg'))
         ),
         child: Column(children: [
           ElevatedButton(onPressed: (){log('userLoggedIn');
@@ -24,7 +28,7 @@ class Welcome extends StatelessWidget {
           Container(
             height: 50,
             width: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.yellow,
               image: DecorationImage(image: AssetImage('assets/images/book 01.png'))
             ),

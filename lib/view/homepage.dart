@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project/controller/bookprovider.dart';
 import 'package:project/controller/shrdprfprovider.dart';
-import 'package:project/view/bottombar.dart';
 import 'package:project/view/loginscreen.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,13 +20,16 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        leading: TextFormField(
+          decoration: InputDecoration(label: Text("search here")),
+        ),
+        backgroundColor: Colors.grey,
         elevation: 0,
         centerTitle: true,
         title: const Text(
           "Books List",
           style: TextStyle(
-              color: Colors.yellow, fontWeight: FontWeight.w900, fontSize: 35),
+              color: Colors.orange, fontWeight: FontWeight.w500, fontSize: 40),
         ),
         actions: [
           IconButton(
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ));
             },
             icon: const Icon(
@@ -51,82 +53,76 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        // color: Colors.black87,
+        padding: const EdgeInsets.all(15),
+        color: Colors.grey,
         child: Consumer<BookProvider>(
           builder: (context, value, child) {
             if (value.booklist.isNotEmpty) {
               final allBooks = value.booklist;
-              return ListView.builder(
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                // crossAxisCount: 2,
-                // childAspectRatio: 0.8,
-                // crossAxisSpacing: size.width * .05,
-                // mainAxisSpacing: size.height * .04,
-                // ),
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: .8,
+                  crossAxisSpacing: size.width * .03,
+                  mainAxisSpacing: size.height * .02,
+                ),
                 itemBuilder: (context, index) {
                   final item = allBooks[index];
-                  return SingleChildScrollView(
-                    padding: const EdgeInsets.all(10),
-                    child: Card(
-                      color: Colors.white54,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
+                  return Column(
+                    children: [
+                      Material(
+                        borderRadius: BorderRadius.circular(30),
+                        elevation: 9,
+                        child: Container(
+                          width: size.width * .4,
+                          height: size.width * .5,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage("${item.image}")),
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
-                                  width: size.width * .3,
-                                  height: size.height * .3,
-                                  decoration: BoxDecoration(
-                                      // color: Colors.red,
-                                      image: DecorationImage(
-                                          image:
-                                              NetworkImage("${item.image}"))),
+                                  width: size.width * .2,
+                                  height: size.height * .2,
+                                  decoration: BoxDecoration(),
                                 ),
                                 SizedBox(
                                   height: size.height * .01,
                                 ),
-                                Text(
-                                  "${item.title}",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 20,
-                                    color: Colors.redAccent,
-                                  ),
-                                ),
                               ],
                             ),
-                            SizedBox(
-                              height: size.height * .01,
+                          ),
+                        ),
+                      ),
+                      // SizedBox(height: 10,),
+                      Container(
+                        width: size.width * .25,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          children: [
+                            Text(
+                              "₹ : ${item.price}".toUpperCase(),
+                              style: const TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.w200),
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Author :  ${item.author}",
-                                  style: const TextStyle(),
-                                ),
-                                Text(
-                                  "Type :  ${item.category}".toUpperCase(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w200),
-                                ),
-                                Text(
-                                  "₹ : ${item.price}".toUpperCase(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w200),
-                                ),
-                                // Text(
-                                //   "${item.description}",
-                                //   style: const TextStyle(),
-                                // ),
-                              ],
+                            Text(
+                              "Type :  ${item.category}".toUpperCase(),
+                              style: const TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.w200),
                             ),
                           ],
                         ),
-                      ),
-                    ),
+                      )
+                    ],
                   );
                 },
                 itemCount: allBooks.length,
