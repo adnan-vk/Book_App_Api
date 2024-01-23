@@ -29,4 +29,8 @@ class BookProvider extends ChangeNotifier {
       log('Error in BookProvider: $e');
     }
   }
+
+  getValues(key) async {
+    return bookservice.getValues(key);
+  }
 }

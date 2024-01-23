@@ -3,8 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project/controller/bookprovider.dart';
 import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/controller/userprovider.dart';
-import 'package:project/view/bottombar.dart';
+import 'package:project/view/homepage.dart';
 import 'package:project/view/loginscreen.dart';
+import 'package:project/view/welcome.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           )
         ),
         debugShowCheckedModeBanner: false,
-        home: const BottomBar(),
+        home: const Welcome(),
       ),
     );
   }

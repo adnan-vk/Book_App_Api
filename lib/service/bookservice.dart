@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:project/model/model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BookService {
   Dio dio = Dio();
@@ -27,5 +28,9 @@ class BookService {
       log('Error in ApiService: $e');
       rethrow;
     }
+  }
+  getValues(key) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString(key);
   }
 }

@@ -19,20 +19,20 @@ class BottomBar extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home),
         title: "Home",
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.grey,
+        activeColorPrimary: Colors.orange,
+        inactiveColorPrimary: Colors.white,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.favorite),
         title: "Favorites",
-        activeColorPrimary: Colors.green,
-        inactiveColorPrimary: Colors.grey,
+        activeColorPrimary: Colors.orange,
+        inactiveColorPrimary: Colors.white,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.person),
         title: "Profile",
         activeColorPrimary: Colors.orange,
-        inactiveColorPrimary: Colors.grey,
+        inactiveColorPrimary: Colors.white,
       ),
     ];
   }

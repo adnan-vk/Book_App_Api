@@ -89,7 +89,13 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => detailsPage(),
+                                builder: (context) => DetailsPage(
+                                  title: item.title,
+                                  image: item.image.toString(),
+                                  description: item.description,
+                                  price: item.price.toString(),
+                                  author: item.author,
+                                ),
                               )),
                           child: Container(
                             // height: size.height*.6,
@@ -113,10 +119,10 @@ class _HomePageState extends State<HomePage> {
                                       left: 180,
                                       top: 20,
                                       child: Container(
-                                        color: Colors.black38,
+                                        color: Colors.white,
                                         child: IconButton(
                                             onPressed: () {},
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.shopping_bag_outlined,
                                               color: Colors.orange,
                                             )),

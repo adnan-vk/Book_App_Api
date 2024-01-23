@@ -122,31 +122,75 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  userLogin(context) async {
-    final getProvider = Provider.of<UserProvider>(context, listen: false);
-    final getshrd = Provider.of<ShrdProvider>(context, listen: false);
-    final userInfo = UserModel(
-      username: getProvider.usernamcontroller.text.toString().trim(),
-      password: getProvider.passwordcontroller.text.toString().trim(),
-    );
+  // userLogin(context) async {
+  //   final getProvider = Provider.of<UserProvider>(context, listen: false);
+  //   final getshrd = Provider.of<ShrdProvider>(context, listen: false);
+  //   final userInfo = UserModel(
+  //     username: getProvider.usernamcontroller.text.toString().trim(),
+  //     password: getProvider.passwordcontroller.text.toString().trim(),
+  //   );
 
-    try {
-      await getProvider.userLogin(userInfo);
-      final tokenId = getshrd.getToken();
-      Navigator.pushReplacement(
+  //   try {
+  //     await getProvider.userLogin(userInfo);
+  //     final tokenId = getshrd.getToken();
+  //     Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => const BottomBar(),
+  //         ));
+  //     log("Token : $tokenId");
+  //     if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
+  //       final sharedPreferences = await SharedPreferences.getInstance();
+  //       await sharedPreferences.setString('Token', tokenId);
+  //       // Navigator.push(
+  //       //     context, MaterialPageRoute(builder: (context) => const HomePage()));
+  //     } else if (getProvider.userStatusCode == '500') {}
+  //   } catch (e) {
+  //     log('Error during user login: $e');
+  //   }
+  // }
+  userLogin(context) async {
+  final getProvider = Provider.of<UserProvider>(context, listen: false);
+  final getshrd = Provider.of<ShrdProvider>(context, listen: false);
+  final userInfo = UserModel(
+    username: getProvider.usernamcontroller.text.toString().trim(),
+    password: getProvider.passwordcontroller.text.toString().trim(),
+  );
+
+  try {
+    await getProvider.userLogin(userInfo);
+
+    // Print user status code for debugging
+    print('User Status Code: ${getProvider.userStatusCode}');
+
+    final tokenId = getshrd.getToken();
+
+    // Print token for debugging
+    print('Token from SharedPreferences: $tokenId');
+
+    Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const BottomBar(),
           ));
-      log("Token : $tokenId");
-      if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
-        final sharedPreferences = await SharedPreferences.getInstance();
-        await sharedPreferences.setString('Token', tokenId);
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => const HomePage()));
-      } else if (getProvider.userStatusCode == '500') {}
-    } catch (e) {
-      log('Error during user login: $e');
+
+    if (getProvider.userStatusCode == "200" && tokenId.isNotEmpty) {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setString('Token', tokenId);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const BottomBar(),
+        ),
+      );
+    } else if (getProvider.userStatusCode == '500') {
+      // Handle status code 500
     }
+  } catch (e) {
+    // Log and handle any exceptions
+    print('Error during user login: $e');
   }
+}
+
 }

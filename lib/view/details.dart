@@ -1,26 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:project/controller/userprovider.dart';
-import 'package:provider/provider.dart';
 
-class detailsPage extends StatelessWidget {
-  const detailsPage({super.key});
+class DetailsPage extends StatelessWidget {
+  final title;
+  final description;
+  final price;
+  final image;
+  final author;
+
+  const DetailsPage(
+      {Key? key,
+      this.title,
+      this.description,
+      this.price,
+      this.image,
+      this.author})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final prov = Provider.of<UserProvider>(context);
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                // image: DecorationImage(image: NetworkImage('${}'))
-              ),
-            )
-          ],
+        appBar: AppBar(
+          backgroundColor: Colors.orange,
+          centerTitle: true,
+          title: Text("BOOK DETAILS"),
         ),
-      ),
-    );
+        body: Padding(
+          padding: EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: 400,
+                      width: 400,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        image: image != null
+                            ? DecorationImage(image: NetworkImage(image))
+                            : null,
+                      ),
+                    ),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 30),
+                    ),
+                    Text(
+                      author,
+                      style: const TextStyle(
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20),
+                    ),
+                    Text(
+                      description,
+                      style: const TextStyle(
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20),
+                    ),
+                    Text(
+                      "₹ : $price".toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: size.height * .08,
+                      width: size.width * .25,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Icon(Icons.favorite_border)),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    SizedBox(
+                      width: size.width * .65,
+                      height: size.height * .08,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.orange)),
+                          onPressed: () {},
+                          child: Text("Add To Cart")),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
