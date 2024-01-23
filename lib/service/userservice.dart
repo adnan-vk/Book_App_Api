@@ -10,7 +10,7 @@ class UserService {
 
   createUser(UserModel userInfo) async {
     const url = 'http://localhost:3000/api/users/signup';
-    log(url);
+    // log(url);
     try {
       Response response = await dio.post(url, data: userInfo.toJson());
       userStatusCode = response.statusCode.toString();

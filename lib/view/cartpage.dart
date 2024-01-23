@@ -13,9 +13,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: AppBar(),
       body: const Column(
-        children: [
-          
-        ],
+        children: [],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/controller/bookprovider.dart';
+import 'package:project/controller/searchprovider.dart';
 import 'package:project/view/details.dart';
 import 'package:project/view/favourite.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<SearchProvider>(context, listen: false).loadProducts();
     final size = MediaQuery.of(context).size;
     Provider.of<BookProvider>(context, listen: false).getBooks();
-    // final prov = Provider.of<ShrdProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +35,11 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const favourite(),));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Favourite(),
+                  ));
             },
             icon: const Icon(
               Icons.shopping_bag_outlined,
@@ -55,6 +60,9 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
+                    onChanged: (value) =>
+                        Provider.of<SearchProvider>(context, listen: false)
+                            .search(value, context),
                     decoration: InputDecoration(
                       labelText: "Search here ...",
                       border: OutlineInputBorder(

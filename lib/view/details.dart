@@ -83,7 +83,8 @@ class DetailsPage extends StatelessWidget {
                       height: size.height * .08,
                       width: size.width * .25,
                       child: ElevatedButton(
-                          onPressed: () {}, child: const Icon(Icons.favorite_border)),
+                          onPressed: () {},
+                          child: const Icon(Icons.favorite_border)),
                     ),
                     const SizedBox(
                       width: 10,
