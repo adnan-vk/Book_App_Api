@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -24,10 +26,10 @@ class DetailsPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.orange,
           centerTitle: true,
-          title: Text("BOOK DETAILS"),
+          title: const Text("BOOK DETAILS"),
         ),
         body: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,20 +83,20 @@ class DetailsPage extends StatelessWidget {
                       height: size.height * .08,
                       width: size.width * .25,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Icon(Icons.favorite_border)),
+                          onPressed: () {}, child: const Icon(Icons.favorite_border)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     SizedBox(
                       width: size.width * .65,
                       height: size.height * .08,
                       child: ElevatedButton(
-                          style: ButtonStyle(
+                          style: const ButtonStyle(
                               backgroundColor:
                                   MaterialStatePropertyAll(Colors.orange)),
                           onPressed: () {},
-                          child: Text("Add To Cart")),
+                          child: const Text("Add To Cart")),
                     ),
                   ],
                 )

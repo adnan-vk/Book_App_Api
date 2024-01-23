@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project/controller/bookprovider.dart';
-import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/controller/userprovider.dart';
-import 'package:project/view/homepage.dart';
-import 'package:project/view/loginscreen.dart';
 import 'package:project/view/welcome.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
 }
+
+const key = "savekey";
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
           create: (context) => BookProvider(),
         ),
         ChangeNotifierProvider(create: (context) => UserProvider(),),
-        ChangeNotifierProvider(create: (context) => ShrdProvider(),),
       ],
       child:   MaterialApp(
         theme: ThemeData(

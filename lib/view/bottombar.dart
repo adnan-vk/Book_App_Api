@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:project/view/favourite.dart';
 import 'package:project/view/homepage.dart';
 import 'package:project/view/loginscreen.dart';
+import 'package:project/view/profile.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -9,8 +11,8 @@ class BottomBar extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const LoginScreen(),
-      const HomePage(),
+      const favourite(),
+      const profile(),
     ];
   }
 

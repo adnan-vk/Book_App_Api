@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/controller/bookprovider.dart';
-import 'package:project/controller/shrdprfprovider.dart';
 import 'package:project/view/details.dart';
-import 'package:project/view/loginscreen.dart';
+import 'package:project/view/favourite.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     Provider.of<BookProvider>(context, listen: false).getBooks();
-    final prov = Provider.of<ShrdProvider>(context);
+    // final prov = Provider.of<ShrdProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,14 +34,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              prov.clearToken();
-              prov.clearUserId();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const favourite(),));
             },
             icon: const Icon(
               Icons.shopping_bag_outlined,
@@ -98,7 +90,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           child: Container(
-                            // height: size.height*.6,
                             padding: const EdgeInsets.all(10),
                             color: Colors.white,
                             child: Column(

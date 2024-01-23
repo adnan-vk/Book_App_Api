@@ -3,7 +3,7 @@ import 'package:project/model/usermodel.dart';
 import 'package:project/service/userservice.dart';
 
 class UserProvider extends ChangeNotifier {
-  TextEditingController usernamcontroller = TextEditingController();
+  TextEditingController usernamecontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController emailController = TextEditingController();
   UserService userService = UserService();

@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:project/controller/bookprovider.dart';
 import 'package:project/view/bottombar.dart';
+import 'package:project/view/homepage.dart';
 import 'package:project/view/loginscreen.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -13,9 +12,10 @@ class Welcome extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/book 01.png'))
-        ),
+        // decoration: BoxDecoration(
+        //   // color: Colors.red,
+        //   // image: DecorationImage(image: AssetImage('assets/images/bg 01.jpg'),fit: BoxFit.fill)
+        // ),
         child: Stack(
           children: [
             Column(
@@ -34,9 +34,7 @@ class Welcome extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            SizedBox(
-                                height: size.height *
-                                    0.1),
+                            SizedBox(height: size.height * 0.1),
                             const Text(
                               'Discover a World of Books',
                               style: TextStyle(
@@ -45,7 +43,7 @@ class Welcome extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 20), 
+                            const SizedBox(height: 20),
                             const Text(
                               'Explore, Read, and Immerse Yourself in Endless Stories',
                               style: TextStyle(
@@ -54,13 +52,16 @@ class Welcome extends StatelessWidget {
                               ),
                               textAlign: TextAlign.center,
                             ),
-                             SizedBox(height: 35),
+                            const SizedBox(height: 35),
                             SizedBox(
-                              height: size.height*.05,
-                              width: size.width*.5,
+                              height: size.height * .05,
+                              width: size.width * .5,
                               child: ElevatedButton(
-                                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                                style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.white)),
                                 onPressed: () {
+                                  checkUserLoggedIn(context);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -68,7 +69,10 @@ class Welcome extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: const Text('Get Started',style: TextStyle(color: Colors.orange), ),
+                                child: const Text(
+                                  'Get Started',
+                                  style: TextStyle(color: Colors.orange),
+                                ),
                               ),
                             ),
                           ],
@@ -84,26 +88,17 @@ class Welcome extends StatelessWidget {
       ),
     );
   }
-}
-
-checkLogin(context) async {
-  // final getProvider = Provider.of<UserProvider>(context, listen: false);
-  final userLoggedIn = await Provider.of<BookProvider>(context, listen: false)
-      .getValues('tokenId');
-  if (userLoggedIn == null) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
-  } else {
-    // await getProvider.setUserData();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const BottomBar(),
-      ),
-    );
+  // checkuserlogin(){
+  //   final shrd = SharedPreferences.getInstance();
+  //   final pref = shrd.getBool(key);
+  // }
+  checkUserLoggedIn(context)async{
+    final _sharedPrfs =await SharedPreferences.getInstance();
+    final _userLoggedIn=_sharedPrfs.getBool('savekey');
+    if(_userLoggedIn==null || _userLoggedIn == false){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+    }else{
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomBar(),));
+    }
   }
 }
