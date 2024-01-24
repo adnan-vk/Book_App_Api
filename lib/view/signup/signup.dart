@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/controller/user_provider.dart';
 import 'package:project/model/user_model.dart';
+import 'package:project/view/details/details.dart';
 import 'package:project/view/login/login_screen.dart';
+import 'package:project/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -31,54 +33,37 @@ class SigninScreen extends StatelessWidget {
                   height: size.height * .6,
                   child: Column(
                     children: [
-                      const Align(
+                      Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("WELCOME")),
+                          child: text(data: "WELCOME")),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Align(
+                      Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Sign up",
-                            style: TextStyle(
-                                color: Colors.orange,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30),
-                          )),
+                          child: text(
+                              data: "Sign up",
+                              color: appcolor.orange,
+                              weight: FontWeight.bold,
+                              size: 30)),
                       const SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        controller: usernamcontroller,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: "Enter Your Username",
-                        ),
-                      ),
+                      textformfield(
+                          controller: usernamcontroller,
+                          labeltext: "Enter Your Username"),
                       const SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: passwordcontroller,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: "Enter Your Password",
-                        ),
-                      ),
+                      textformfield(
+                          controller: passwordcontroller,
+                          labeltext: "Enter Your Password"),
                       const SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: "Enter Your Email",
-                        ),
-                      ),
+                      textformfield(
+                          controller: emailController,
+                          labeltext: "Enter Your Email"),
                       const SizedBox(
                         height: 20,
                       ),
@@ -90,19 +75,17 @@ class SigninScreen extends StatelessWidget {
                           }),
                       Row(
                         children: [
-                          const Text("Back to Login.."),
+                          text(data: "Back to Login.."),
                           TextButton(
                               onPressed: () {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
+                                      builder: (context) => LoginScreen(),
                                     ));
                               },
-                              child: const Text(
-                                "LOGIN",
-                                style: TextStyle(color: Colors.orange),
-                              )),
+                              child:
+                                  text(data: "LOGIN", color: appcolor.orange)),
                         ],
                       )
                     ],

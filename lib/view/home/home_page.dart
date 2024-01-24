@@ -3,6 +3,7 @@ import 'package:project/controller/book_provider.dart';
 import 'package:project/controller/search_provider.dart';
 import 'package:project/view/details/details.dart';
 import 'package:project/view/favourite/favourite.dart';
+import 'package:project/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -56,19 +57,13 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                onChanged: (value) =>
-                    Provider.of<SearchProvider>(context, listen: false)
-                        .search(value, context),
-                decoration: InputDecoration(
-                  labelText: "Search here ...",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(10),
+                child: textformfield(
+                  labeltext: "Search here ...",
+                  onchange: (value) =>
+                      Provider.of<SearchProvider>(context, listen: false)
+                          .search(value, context),
+                )),
             const SizedBox(
               height: 10,
             ),
@@ -138,34 +133,29 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  Text(
-                                    "name : ${item.title}".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 15),
-                                  ),
-                                  Text(
-                                    "author : ${item.author}".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 10),
-                                  ),
-                                  Text(
-                                    "Type :  ${item.category}".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 10),
-                                  ),
-                                  Text(
-                                    "₹ : ${item.price}".toUpperCase(),
-                                    style: const TextStyle(
-                                        color: Colors.orange,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 10),
-                                  ),
+                                  text(
+                                      data:
+                                          "name : ${item.title}".toUpperCase(),
+                                      color: appcolor.orange,
+                                      weight: FontWeight.w900,
+                                      size: 15),
+                                  text(
+                                      data: "author : ${item.author}"
+                                          .toUpperCase(),
+                                      color: appcolor.orange,
+                                      size: 10,
+                                      weight: FontWeight.w200),
+                                  text(
+                                      data: "Type :  ${item.category}"
+                                          .toUpperCase(),
+                                      color: appcolor.orange,
+                                      weight: FontWeight.w200,
+                                      size: 10),
+                                  text(
+                                      data: "₹ : ${item.price}".toUpperCase(),
+                                      color: appcolor.orange,
+                                      size: 10,
+                                      weight: FontWeight.w200)
                                 ],
                               ),
                             ),
@@ -241,34 +231,28 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Text(
-                                  "name : ${item.title}".toUpperCase(),
-                                  style: const TextStyle(
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15),
-                                ),
-                                Text(
-                                  "author : ${item.author}".toUpperCase(),
-                                  style: const TextStyle(
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.w200,
-                                      fontSize: 10),
-                                ),
-                                Text(
-                                  "Type :  ${item.category}".toUpperCase(),
-                                  style: const TextStyle(
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.w200,
-                                      fontSize: 10),
-                                ),
-                                Text(
-                                  "₹ : ${item.price}".toUpperCase(),
-                                  style: const TextStyle(
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.w200,
-                                      fontSize: 10),
-                                ),
+                                text(
+                                    data: "name : ${item.title}".toUpperCase(),
+                                    color: appcolor.orange,
+                                    weight: FontWeight.w900,
+                                    size: 15),
+                                text(
+                                    data:
+                                        "author : ${item.author}".toUpperCase(),
+                                    color: appcolor.orange,
+                                    size: 10,
+                                    weight: FontWeight.w200),
+                                text(
+                                    data: "Type :  ${item.category}"
+                                        .toUpperCase(),
+                                    color: appcolor.orange,
+                                    weight: FontWeight.w200,
+                                    size: 10),
+                                text(
+                                    data: "₹ : ${item.price}".toUpperCase(),
+                                    color: appcolor.orange,
+                                    size: 10,
+                                    weight: FontWeight.w200)
                               ],
                             ),
                           ),

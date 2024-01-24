@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project/view/details/details.dart';
 import 'package:project/widgets/bottom_bar.dart';
 import 'package:project/view/login/login_screen.dart';
+import 'package:project/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Welcome extends StatelessWidget {
@@ -29,31 +31,23 @@ class Welcome extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(height: size.height * 0.1),
-                          const Text(
-                            'Discover a World of',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Text(
-                            'Books',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          text(
+                              data: 'Discover a World of',
+                              color: appcolor.white,
+                              size: 28,
+                              weight: FontWeight.bold),
+                          text(
+                              data: 'Books',
+                              color: appcolor.white,
+                              size: 28,
+                              weight: FontWeight.bold),
                           const SizedBox(height: 20),
-                          const Text(
-                            'Explore, Read, and Immerse Yourself in Endless Stories',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                          text(
+                              data:
+                                  'Explore, Read, and Immerse Yourself in Endless Stories',
+                              color: appcolor.white,
+                              size: 16,
+                              align: TextAlign.center),
                           const SizedBox(height: 35),
                           SizedBox(
                             height: size.height * .05,
@@ -65,9 +59,9 @@ class Welcome extends StatelessWidget {
                               onPressed: () {
                                 checkUserLoggedIn(context);
                               },
-                              child: const Text(
-                                'Get Started',
-                                style: TextStyle(color: Colors.orange),
+                              child: text(
+                                data: 'Get Started',
+                                color: appcolor.orange,
                               ),
                             ),
                           ),
@@ -91,7 +85,7 @@ class Welcome extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => LoginScreen(),
           ));
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(

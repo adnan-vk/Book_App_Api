@@ -2,13 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:project/controller/user_provider.dart';
+import 'package:project/view/details/details.dart';
 import 'package:project/widgets/bottom_bar.dart';
 import 'package:project/view/signup/signup.dart';
+import 'package:project/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key});
+  LoginScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,54 +35,37 @@ class LoginScreen extends StatelessWidget {
                   height: size.height * .6,
                   child: Column(
                     children: [
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("WELCOME BACK"),
-                      ),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: text(data: "WELCOME BACK")),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: text(
+                              data: "Log In",
+                              color: appcolor.orange,
+                              weight: FontWeight.bold,
+                              size: 30)),
                       const SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        controller: pro.usernamecontroller,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          labelText: "Enter Your Username",
-                        ),
-                      ),
+                      textformfield(
+                          controller: pro.usernamecontroller,
+                          labeltext: "Enter Your Username"),
                       const SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: pro.passwordcontroller,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          labelText: "Enter Your Password",
-                        ),
-                      ),
+                      textformfield(
+                          controller: pro.passwordcontroller,
+                          labeltext: "Enter Your Password"),
                       const SizedBox(
                         height: 20,
                       ),
                       FloatingActionButton.extended(
-                        label: const Text("LOGIN"),
-                        backgroundColor: Colors.orange,
+                        label: text(data: "LOGIN"),
+                        backgroundColor: appcolor.orange,
                         onPressed: () {
                           userLogin(context);
                         },
@@ -90,21 +75,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text("Don't Have an Account ? "),
+                          text(data: "Don't Have an Account ? "),
                           TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SigninScreen(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              "SIGNUP",
-                              style: TextStyle(color: Colors.orange),
-                            ),
-                          ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SigninScreen(),
+                                  ),
+                                );
+                              },
+                              child:
+                                  text(data: "SIGNUP", color: appcolor.orange)),
                         ],
                       )
                     ],

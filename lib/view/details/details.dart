@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:project/theme/app_colors.dart';
+import 'package:project/widgets/widgets.dart';
+
+AppColors appcolor = AppColors();
 
 class DetailsPage extends StatelessWidget {
   final title;
@@ -24,10 +28,9 @@ class DetailsPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.orange,
-          centerTitle: true,
-          title: const Text("BOOK DETAILS"),
-        ),
+            backgroundColor: Colors.orange,
+            centerTitle: true,
+            title: text(data: "BOOK DETAILS")),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: SingleChildScrollView(
@@ -46,34 +49,26 @@ class DetailsPage extends StatelessWidget {
                             : null,
                       ),
                     ),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 30),
-                    ),
-                    Text(
-                      author,
-                      style: const TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w200,
-                          fontSize: 20),
-                    ),
-                    Text(
-                      description,
-                      style: const TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w200,
-                          fontSize: 20),
-                    ),
-                    Text(
-                      "₹ : $price".toUpperCase(),
-                      style: const TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w200,
-                          fontSize: 20),
-                    ),
+                    text(
+                        data: title,
+                        color: appcolor.orange,
+                        size: 30,
+                        weight: FontWeight.w900),
+                    text(
+                        data: author,
+                        color: appcolor.orange,
+                        weight: FontWeight.w200,
+                        size: 20),
+                    text(
+                        data: description,
+                        color: appcolor.orange,
+                        weight: FontWeight.w200,
+                        size: 20),
+                    text(
+                        data: "₹ : $price",
+                        color: appcolor.orange,
+                        weight: FontWeight.w200,
+                        size: 20),
                   ],
                 ),
                 Row(
@@ -97,7 +92,7 @@ class DetailsPage extends StatelessWidget {
                               backgroundColor:
                                   MaterialStatePropertyAll(Colors.orange)),
                           onPressed: () {},
-                          child: const Text("Add To Cart")),
+                          child: text(data: "Add To Cart")),
                     ),
                   ],
                 )
