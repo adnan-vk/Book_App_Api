@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:project/view/login/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -112,7 +116,15 @@ class Profile extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                final data = await SharedPreferences.getInstance();
+                data.clear();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ));
+              },
               child: const Card(
                 elevation: 5,
                 margin: EdgeInsets.all(10),

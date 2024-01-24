@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/model/usermodel.dart';
-import 'package:project/service/userservice.dart';
+import 'package:project/model/user_model.dart';
+import 'package:project/service/user_service.dart';
 
 class UserProvider extends ChangeNotifier {
   TextEditingController usernamecontroller = TextEditingController();

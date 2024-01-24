@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/controller/userprovider.dart';
-import 'package:project/model/usermodel.dart';
-import 'package:project/view/loginscreen.dart';
+import 'package:project/controller/user_provider.dart';
+import 'package:project/model/user_model.dart';
+import 'package:project/view/login/login_screen.dart';
 import 'package:provider/provider.dart';
 
 class SigninScreen extends StatelessWidget {

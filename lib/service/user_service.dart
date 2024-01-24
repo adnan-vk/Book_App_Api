@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:project/model/usermodel.dart';
+import 'package:project/model/user_model.dart';
 
 class UserService {
   String? userStatusCode;

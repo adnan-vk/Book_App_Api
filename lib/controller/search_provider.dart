@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:project/controller/bookprovider.dart';
+import 'package:project/controller/book_provider.dart';
 import 'package:project/model/model.dart';
-import 'package:project/service/bookservice.dart';
+import 'package:project/service/book_service.dart';
 import 'package:provider/provider.dart';
 
-class SearchProvider extends ChangeNotifier{
+class SearchProvider extends ChangeNotifier {
   BookService bookService = BookService();
-  TextEditingController searchController = TextEditingController();
   List<BookModel> searchedList = [];
-  loadProducts() async {
+
+  loadBooks() async {
     final allData = await bookService.getBooks();
     searchedList = allData;
     notifyListeners();
   }
-
   search(String enterName, context) {
     final getPrvdr = Provider.of<BookProvider>(context, listen: false);
-    if (enterName.isEmpty) {
-      searchedList = [...getPrvdr.booklist];
-    } else {
+    if(enterName.isNotEmpty) {
       searchedList = getPrvdr.booklist
-          .where((BookModel product) =>
-              product.title!.toLowerCase().contains(enterName.toLowerCase()))
+          .where((BookModel book) =>
+              book.title!.toLowerCase().contains(enterName.toLowerCase()))
           .toList();
     }
     notifyListeners();

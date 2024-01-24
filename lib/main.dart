@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project/controller/bookprovider.dart';
-import 'package:project/controller/searchprovider.dart';
-import 'package:project/controller/userprovider.dart';
-import 'package:project/view/welcome.dart';
+import 'package:project/controller/book_provider.dart';
+import 'package:project/controller/search_provider.dart';
+import 'package:project/controller/user_provider.dart';
+import 'package:project/view/welcome/welcome.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {

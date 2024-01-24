@@ -1,9 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:project/controller/userprovider.dart';
-import 'package:project/view/bottombar.dart';
-import 'package:project/view/signup.dart';
+import 'package:project/controller/user_provider.dart';
+import 'package:project/widgets/bottom_bar.dart';
+import 'package:project/view/signup/signup.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

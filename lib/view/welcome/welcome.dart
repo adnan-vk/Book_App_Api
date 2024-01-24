@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/view/bottombar.dart';
-import 'package:project/view/loginscreen.dart';
+import 'package:project/widgets/bottom_bar.dart';
+import 'package:project/view/login/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Welcome extends StatelessWidget {

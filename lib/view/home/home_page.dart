@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/controller/bookprovider.dart';
-import 'package:project/controller/searchprovider.dart';
-import 'package:project/view/details.dart';
-import 'package:project/view/favourite.dart';
+import 'package:project/controller/book_provider.dart';
+import 'package:project/controller/search_provider.dart';
+import 'package:project/view/details/details.dart';
+import 'package:project/view/favourite/favourite.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<SearchProvider>(context, listen: false).loadProducts();
+    final prov = Provider.of<SearchProvider>(context, listen: false);
+    prov.loadBooks();
     final size = MediaQuery.of(context).size;
     Provider.of<BookProvider>(context, listen: false).getBooks();
 
@@ -36,10 +37,11 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Favourite(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Favourite(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.shopping_bag_outlined,
@@ -84,19 +86,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                     itemBuilder: (context, index) {
                       final item = allBooks[index];
+                      if (prov.searchedList.isEmpty) {
+                        item;
+                      }
+                      prov.searchedList[index];
                       return SingleChildScrollView(
                         child: GestureDetector(
                           onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailsPage(
-                                  title: item.title,
-                                  image: item.image.toString(),
-                                  description: item.description,
-                                  price: item.price.toString(),
-                                  author: item.author,
-                                ),
-                              )),
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsPage(
+                                title: item.title,
+                                image: item.image.toString(),
+                                description: item.description,
+                                price: item.price.toString(),
+                                author: item.author,
+                              ),
+                            ),
+                          ),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             color: Colors.white,
@@ -115,17 +122,18 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Positioned(
-                                      left: 180,
-                                      top: 20,
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              Icons.shopping_bag_outlined,
-                                              color: Colors.orange,
-                                            )),
-                                      ))
+                                    left: 180,
+                                    top: 20,
+                                    child: Container(
+                                      color: Colors.white,
+                                      child: IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.shopping_bag_outlined,
+                                            color: Colors.orange,
+                                          )),
+                                    ),
+                                  )
                                 ]),
                                 const SizedBox(
                                   height: 20,
@@ -164,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    itemCount: allBooks.length,
+                    itemCount: prov.searchedList.length,
                   ),
                 ),
               ],

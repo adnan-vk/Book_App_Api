@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:project/view/favourite.dart';
-import 'package:project/view/homepage.dart';
-import 'package:project/view/profile.dart';
+import 'package:project/view/favourite/favourite.dart';
+import 'package:project/view/home/home_page.dart';
+import 'package:project/view/profile/profile.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key}) : super(key: key);
