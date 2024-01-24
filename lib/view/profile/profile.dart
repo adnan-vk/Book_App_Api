@@ -116,11 +116,12 @@ class Profile extends StatelessWidget {
               onTap: () async {
                 final data = await SharedPreferences.getInstance();
                 data.clear();
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => LoginScreen(),
-                    ));
+                    ),
+                    (route) => false);
               },
               child: Card(
                 elevation: 5,
